@@ -118,11 +118,13 @@
     "@media (max-width:600px){" +
     // Phones: full-width bar across the bottom of the screen, like the old app.
     ".wrap{left:0;right:0;bottom:0}" +
-    ".badge{width:100%;min-height:78px;border-radius:10px 10px 0 0;border-bottom:0;" +
-    "padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 16px rgba(0,0,0,.14)}" +
-    ".badge .g{width:68px}.badge .g svg{width:36px;height:36px}" +
-    ".badge .mid{flex:1;min-width:0;padding:10px 14px}.badge .score{font-size:22px}.badge .star{width:20px;height:20px}.badge .count{font-size:13px}" +
-    ".badge .up{width:56px}.badge .up svg{width:22px;height:22px}" +
+    ".badge{width:100%;min-height:52px;border-radius:10px 10px 0 0;border-bottom:0;" +
+    "padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 12px rgba(0,0,0,.12)}" +
+    ".badge .g{width:52px}.badge .g svg{width:26px;height:26px}" +
+    ".badge .mid{flex:1;min-width:0;flex-direction:row;align-items:center;justify-content:flex-start;gap:12px;padding:6px 12px}" +
+    ".badge .score{font-size:18px;gap:6px}.badge .star{width:15px;height:15px}" +
+    ".badge .count{font-size:11px;margin-top:0;white-space:nowrap}" +
+    ".badge .up{width:44px}.badge .up svg{width:18px;height:18px}" +
     ".panel{left:0;right:0;bottom:0;width:100%;max-width:100%;height:85vh;border-radius:14px 14px 0 0}}" +
     "@media (prefers-reduced-motion:reduce){.badge{transition:none}}";
 
