@@ -155,7 +155,7 @@
       '<div class="panel" role="dialog" aria-modal="false" aria-label="Google reviews for Pastry Leidy" hidden>' +
       '<div class="head"><div class="row"><span class="g">' + G_LOGO + "</span><h2>" + esc(place.name || "Pastry Leidy") + "</h2></div>" +
       '<div class="sum"><b>' + ratingText + "</b>" + stars(rating, 20) + "</div>" +
-      '<div class="sub">Based on ' + count + " Google reviews &middot; Highest rated first</div>" +
+      '<div class="sub">Based on ' + count + " Google reviews</div>" +
       '<div class="actions">' +
       (place.writeReviewUrl ? '<a class="btn primary" target="_blank" rel="noopener" href="' + esc(place.writeReviewUrl) + '">Write a review</a>' : "") +
       (place.url ? '<a class="btn ghost" target="_blank" rel="noopener" href="' + esc(place.url) + '">See on Google</a>' : "") +
