@@ -12,11 +12,10 @@
   var base = script && script.src ? script.src.replace(/[^/]*(\?.*)?$/, "") : "";
   var DATA_URL = (script && script.getAttribute("data-src")) || base + "reviews.json";
   var PAGE_SIZE = 12;
-  var DISMISS_KEY = "plReviewsBadgeHidden";
 
   var PLUM = "#995D7F";
   var PLUM_DARK = "#7d4a67";
-  var STAR = "#F4A622";
+  var STAR = "#F08C2E";
   var FONT = "'futura-lt-w01-book', 'Futura', 'Avenir Next', 'Segoe UI', Helvetica, Arial, sans-serif";
 
   var G_LOGO =
@@ -62,19 +61,21 @@
   var CSS =
     ":host{all:initial}" +
     "*{box-sizing:border-box;font-family:" + FONT + "}" +
+    // Badge layout: [Google logo] | [rating, stars, count] | [up arrow], matching the old app.
     ".wrap{position:fixed;left:16px;bottom:16px;z-index:2147483000}" +
-    ".badge{position:relative;display:flex;align-items:center;gap:12px;" +
-    "background:#fff;border-radius:10px;padding:10px 14px 10px 12px;box-shadow:0 4px 18px rgba(0,0,0,.16);" +
-    "cursor:pointer;border:0;color:#222;text-align:left;transition:transform .15s ease,box-shadow .15s ease}" +
-    ".badge:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}" +
-    ".badge:focus-visible,.btn:focus-visible,.more:focus-visible,.close:focus-visible,.hide:focus-visible{outline:2px solid " + PLUM + ";outline-offset:2px}" +
-    ".badge .g{width:34px;height:34px;flex:none}" +
-    ".badge .g svg{width:100%;height:100%}" +
-    ".badge .score{display:flex;align-items:center;gap:6px;font-size:18px;line-height:1;color:#222}" +
-    ".badge .count{font-size:11px;letter-spacing:.08em;color:#555;margin-top:5px;text-transform:uppercase}" +
-    ".hide{position:absolute;top:-8px;right:-8px;width:22px;height:22px;border-radius:50%;border:0;background:#fff;" +
-    "box-shadow:0 1px 6px rgba(0,0,0,.25);color:#666;font-size:14px;line-height:22px;cursor:pointer;padding:0;opacity:0;transition:opacity .15s}" +
-    ".wrap:hover .hide,.hide:focus-visible{opacity:1}" +
+    ".badge{display:flex;align-items:stretch;min-height:66px;padding:0;margin:0;background:#fff;" +
+    "border:1px solid #ececec;border-radius:8px;box-shadow:0 4px 18px rgba(0,0,0,.14);" +
+    "cursor:pointer;color:#222;text-align:left;transition:box-shadow .15s ease}" +
+    ".badge:hover{box-shadow:0 6px 24px rgba(0,0,0,.2)}" +
+    ".badge:focus-visible,.btn:focus-visible,.more:focus-visible,.close:focus-visible{outline:2px solid " + PLUM + ";outline-offset:2px}" +
+    ".badge .g{display:flex;align-items:center;justify-content:center;width:70px;flex:none;border-right:1px solid #ececec}" +
+    ".badge .g svg{width:34px;height:34px}" +
+    ".badge .mid{display:flex;flex-direction:column;justify-content:center;padding:10px 20px 10px 18px}" +
+    ".badge .score{display:flex;align-items:center;gap:8px;font-size:20px;line-height:1;color:" + STAR + "}" +
+    ".badge .count{font-size:12px;letter-spacing:.06em;color:#333;margin-top:7px;text-transform:uppercase}" +
+    ".badge .up{display:flex;align-items:center;justify-content:center;width:54px;flex:none;border-left:1px solid #ececec;color:#b5b5b5;transition:color .15s}" +
+    ".badge:hover .up{color:" + PLUM + "}" +
+    ".badge .up svg{width:20px;height:20px}" +
     ".stars{display:inline-flex;gap:1px;vertical-align:middle}" +
     ".panel{position:fixed;left:16px;bottom:16px;z-index:2147483001;width:400px;max-width:calc(100vw - 32px);" +
     "height:min(640px,calc(100vh - 32px));background:#fff;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.25);" +
@@ -115,9 +116,13 @@
     ".more:hover{background:#fafafa}" +
     ".foot{font-size:11px;color:#888;text-align:center;padding:8px;border-top:1px solid #eee}" +
     "@media (max-width:600px){" +
-    ".wrap{left:10px;bottom:10px}.badge{padding:8px 12px 8px 10px;gap:9px}" +
-    ".badge .g{width:26px;height:26px}.badge .score{font-size:15px}.badge .count{font-size:10px}" +
-    ".hide{opacity:1}" +
+    // Phones: full-width bar across the bottom of the screen, like the old app.
+    ".wrap{left:0;right:0;bottom:0}" +
+    ".badge{width:100%;min-height:78px;border-radius:10px 10px 0 0;border-bottom:0;" +
+    "padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 16px rgba(0,0,0,.14)}" +
+    ".badge .g{width:80px}.badge .g svg{width:40px;height:40px}" +
+    ".badge .mid{flex:1}.badge .score{font-size:24px}.badge .star{width:22px;height:22px}.badge .count{font-size:14px}" +
+    ".badge .up{width:68px}.badge .up svg{width:24px;height:24px}" +
     ".panel{left:0;right:0;bottom:0;width:100%;max-width:100%;height:85vh;border-radius:14px 14px 0 0}}" +
     "@media (prefers-reduced-motion:reduce){.badge{transition:none}}";
 
@@ -142,9 +147,10 @@
       '<button class="badge" type="button" aria-haspopup="dialog" aria-expanded="false" aria-label="Rated ' + ratingText +
       " out of 5 from " + count + ' Google reviews. Open reviews.">' +
       '<span class="g">' + G_LOGO + "</span>" +
-      '<span><span class="score">' + ratingText + " " + stars(rating, 16) + "</span>" +
-      '<div class="count">' + count + " reviews</div></span></button>" +
-      '<button class="hide" type="button" aria-label="Hide reviews badge">&times;</button>' +
+      '<span class="mid"><span class="score">' + ratingText + " " + stars(rating, 18) + "</span>" +
+      '<span class="count">' + count + " reviews</span></span>" +
+      '<span class="up" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+      'stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></span></button>' +
       "</div>" +
       '<div class="panel" role="dialog" aria-modal="false" aria-label="Google reviews for Pastry Leidy" hidden>' +
       '<div class="head"><div class="row"><span class="g">' + G_LOGO + "</span><h2>" + esc(place.name || "Pastry Leidy") + "</h2></div>" +
@@ -164,10 +170,6 @@
     var panel = root.querySelector(".panel");
     var list = root.querySelector(".list");
     var shown = 0;
-
-    try {
-      if (sessionStorage.getItem(DISMISS_KEY) === "1") wrap.style.display = "none";
-    } catch (e) {}
 
     function reviewHtml(r) {
       var initial = esc((r.name || "?").trim().charAt(0).toUpperCase());
@@ -247,11 +249,6 @@
 
     badge.addEventListener("click", open);
     root.querySelector(".close").addEventListener("click", close);
-    root.querySelector(".hide").addEventListener("click", function (e) {
-      e.stopPropagation();
-      wrap.style.display = "none";
-      try { sessionStorage.setItem(DISMISS_KEY, "1"); } catch (err) {}
-    });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && !panel.hidden) close();
     });
