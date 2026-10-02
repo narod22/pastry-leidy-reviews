@@ -123,7 +123,10 @@
 
   function render(data) {
     var place = data.place || {};
-    var reviews = (data.reviews || []).slice();
+    // Highest rated first, newest first within each rating. Every review is still shown.
+    var reviews = (data.reviews || []).slice().sort(function (a, b) {
+      return (b.stars - a.stars) || (new Date(b.date) - new Date(a.date));
+    });
     var rating = Number(place.rating || 0);
     var count = Number(place.reviewsCount || reviews.length);
     var ratingText = rating.toFixed(1);
@@ -146,7 +149,7 @@
       '<div class="panel" role="dialog" aria-modal="false" aria-label="Google reviews for Pastry Leidy" hidden>' +
       '<div class="head"><div class="row"><span class="g">' + G_LOGO + "</span><h2>" + esc(place.name || "Pastry Leidy") + "</h2></div>" +
       '<div class="sum"><b>' + ratingText + "</b>" + stars(rating, 20) + "</div>" +
-      '<div class="sub">Based on ' + count + " Google reviews</div>" +
+      '<div class="sub">Based on ' + count + " Google reviews &middot; Highest rated first</div>" +
       '<div class="actions">' +
       (place.writeReviewUrl ? '<a class="btn primary" target="_blank" rel="noopener" href="' + esc(place.writeReviewUrl) + '">Write a review</a>' : "") +
       (place.url ? '<a class="btn ghost" target="_blank" rel="noopener" href="' + esc(place.url) + '">See on Google</a>' : "") +
