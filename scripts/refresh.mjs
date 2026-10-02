@@ -55,7 +55,8 @@ function shape(items) {
     .map((i) => ({
       id: i.reviewId,
       name: i.name || "Google user",
-      photo: i.reviewerPhotoUrl || null,
+      // Apify returns 1920px avatars; the badge shows them at 36px, so ask Google for 72px.
+      photo: i.reviewerPhotoUrl ? i.reviewerPhotoUrl.replace(/=s\d+/, "=s72") : null,
       stars: i.stars,
       date: i.publishedAtDate,
       text: (i.text || i.textTranslated || "").trim() || null,
