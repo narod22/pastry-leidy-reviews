@@ -247,6 +247,27 @@
       badge.focus();
     }
 
+    // On phones, Wix pins its Quick Action Bar (Email, Facebook, Phone) to the bottom of
+    // the screen. Sit just above it so those buttons stay tappable.
+    var phone = window.matchMedia ? window.matchMedia("(max-width:600px)") : null;
+    function clearQuickActionBar() {
+      var bar = document.getElementById("QUICK_ACTION_BAR");
+      var lift = 0;
+      if (phone && phone.matches && bar) {
+        var r = bar.getBoundingClientRect();
+        if (r.height > 0 && r.top < window.innerHeight) lift = Math.max(0, Math.round(window.innerHeight - r.top));
+      }
+      wrap.style.bottom = lift ? lift + "px" : "";
+    }
+    clearQuickActionBar();
+    window.addEventListener("resize", clearQuickActionBar);
+    // Wix can draw the bar after this script runs, so check again for a few seconds.
+    var checks = 0;
+    var timer = setInterval(function () {
+      clearQuickActionBar();
+      if (++checks >= 20) clearInterval(timer);
+    }, 500);
+
     badge.addEventListener("click", open);
     root.querySelector(".close").addEventListener("click", close);
     document.addEventListener("keydown", function (e) {
