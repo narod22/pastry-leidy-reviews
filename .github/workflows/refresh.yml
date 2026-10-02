@@ -1,0 +1,36 @@
+name: Refresh Google reviews
+
+on:
+  schedule:
+    - cron: "0 11 * * 1" # Mondays 11:00 UTC (7am ET)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Pull reviews from Apify
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+        run: node scripts/refresh.mjs
+      # The file's "updated" stamp changes every run, so this commits weekly. That is
+      # deliberate: GitHub switches off scheduled workflows in repos with no commits
+      # for 60 days, and the weekly commit keeps this one alive.
+      - name: Commit
+        run: |
+          if git diff --quiet -- docs/reviews.json; then
+            echo "Nothing changed."
+            exit 0
+          fi
+          git config user.name "reviews-bot"
+          git config user.email "reviews-bot@users.noreply.github.com"
+          git add docs/reviews.json
+          git commit -m "Refresh Google reviews"
+          git push
