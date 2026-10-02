@@ -120,9 +120,9 @@
     ".wrap{left:0;right:0;bottom:0}" +
     ".badge{width:100%;min-height:78px;border-radius:10px 10px 0 0;border-bottom:0;" +
     "padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -2px 16px rgba(0,0,0,.14)}" +
-    ".badge .g{width:80px}.badge .g svg{width:40px;height:40px}" +
-    ".badge .mid{flex:1}.badge .score{font-size:24px}.badge .star{width:22px;height:22px}.badge .count{font-size:14px}" +
-    ".badge .up{width:68px}.badge .up svg{width:24px;height:24px}" +
+    ".badge .g{width:68px}.badge .g svg{width:36px;height:36px}" +
+    ".badge .mid{flex:1;min-width:0;padding:10px 14px}.badge .score{font-size:22px}.badge .star{width:20px;height:20px}.badge .count{font-size:13px}" +
+    ".badge .up{width:56px}.badge .up svg{width:22px;height:22px}" +
     ".panel{left:0;right:0;bottom:0;width:100%;max-width:100%;height:85vh;border-radius:14px 14px 0 0}}" +
     "@media (prefers-reduced-motion:reduce){.badge{transition:none}}";
 
