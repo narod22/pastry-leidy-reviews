@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reviews Badge Preview</title>
+<style>
+  :root { --bg: #f9f2f6; --ink: #222; --muted: #555; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #1f1a1d; --ink: #eee; --muted: #bbb; } }
+  :root[data-theme="dark"] { --bg: #1f1a1d; --ink: #eee; --muted: #bbb; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Futura', 'Avenir Next', 'Segoe UI', Helvetica, Arial, sans-serif; }
+  main { max-width: 640px; margin: 0 auto; padding: 64px 16px; }
+  h1 { font-weight: 400; font-size: 32px; margin: 0 0 12px; }
+  p { color: var(--muted); line-height: 1.6; }
+  code { font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Pastry Leidy reviews badge</h1>
+  <p>Preview of the Google reviews badge for pastryleidy.com. The badge sits in the bottom-left corner; click it to open every review.</p>
+  <p>Reviews refresh every Monday from Google. Data: <code>reviews.json</code>.</p>
+</main>
+<script src="badge.js" defer></script>
+</body>
+</html>
