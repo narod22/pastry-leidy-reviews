@@ -22,3 +22,14 @@ If a scrape returns nothing, the wrong place, no rating, or more than 20% fewer 
 ## Setup
 
 The workflow needs one repository secret, `APIFY_TOKEN` (Apify console → Settings → API & Integrations).
+
+## Working notes
+
+Moved here from Claude's memory on 2026-10-20.
+
+- Built 2026-10-01 because the MarketPushApps "Google Reviews" app's free plan caps at 10 reviews and Nathan won't pay for apps. Public repo on Nathan's personal account; repo-local git identity is narod22 because the global default authors as ranch-26.
+- On the site: Wix Custom Embed id `8db32c0c-989b-4b1d-90b5-ca39c00a7f3b` ("Pastry Leidy reviews badge", BODY_END), switched on 2026-10-01 after Johanna's OK. The embed src carries `badge.js?v=N`; bump N (PATCH with the current revision) after any `badge.js` change, because GitHub Pages lets browsers cache it for 10 minutes.
+- Data: Apify `compass/Google-Maps-Reviews-Scraper`, place ID `ChIJiy8JYSqtGYgRsFX0NiXSfDI`, on Nathan's personal Apify account. Token "Pastry Leidy reviews" is the repo secret `APIFY_TOKEN`.
+- The `gh` token available to Claude lacks `workflow` scope, so changes to the workflow file go through the GitHub web UI (a prefilled `/new/main?filename=...&value=...` link).
+- Sort is highest rated first, newest within a rating. Never hide reviews by rating: FTC 16 CFR 465.7 bars suppressing negative reviews while implying all are shown. A review can be dropped only if it is reasonably believed fake or unrelated.
+- Layout copies the old app (logo, rating and count, up arrow). Phones get a slim full-width bar with no close button, which lifts itself above Wix's mobile `#QUICK_ACTION_BAR` when present.
