@@ -1,14 +1,24 @@
 {
-  "updated": "2026-10-19T17:21:16.861Z",
+  "updated": "2026-10-26T18:14:19.680Z",
   "place": {
     "name": "Pastry Leidy",
     "placeId": "ChIJiy8JYSqtGYgRsFX0NiXSfDI",
     "rating": 5,
-    "reviewsCount": 86,
+    "reviewsCount": 87,
     "url": "https://www.google.com/maps/place/?q=place_id:ChIJiy8JYSqtGYgRsFX0NiXSfDI",
     "writeReviewUrl": "https://search.google.com/local/writereview?placeid=ChIJiy8JYSqtGYgRsFX0NiXSfDI"
   },
   "reviews": [
+    {
+      "id": "Ci9DQUlRQUNvZENodHljRjlvT25odlEzZHdSR2t3YVZWNU9EVkdiWGN3ZVV4RVprRRAB",
+      "name": "Stephanie Laing",
+      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjXbrHEZ-KvbfMcyf-buu6CIgCmqnopFC5LQ2nCyrV8qXIUohiI7=s72-c-rp-mo-br100",
+      "stars": 5,
+      "date": "2026-10-26T15:50:28.051Z",
+      "text": "She made a fantastic birthday cake for my friends! Would get another cake from there :)",
+      "reply": null,
+      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT25odlEzZHdSR2t3YVZWNU9EVkdiWGN3ZVV4RVprRRAB!2m1!1s0x0:0x327cd22536f455b0!3m1!1s2@1:CAIQACodChtycF9oOnhvQ3dwRGkwaVV5ODVGbXcweUxEZkE%7C%7C?hl=en"
+    },
     {
       "id": "Ci9DQUlRQUNvZENodHljRjlvT2pZelRrZG1kazQwYUVZMGMydGFWSGxNTUVsVWFFRRAB",
       "name": "Justin Drobish",
