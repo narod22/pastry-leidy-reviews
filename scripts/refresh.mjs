@@ -83,15 +83,14 @@ function shape(items) {
   };
 }
 
-async function main() {
+const ATTEMPTS = 2; // Apify sometimes times out or returns a partial scrape; one retry usually clears it
+const RETRY_WAIT_MS = 60_000;
+
+// Fetches, shapes and checks one scrape. Throws if it isn't safe to publish.
+async function scrape(prevCount) {
   const i = process.argv.indexOf("--dataset");
   const items = i > -1 ? await fromDataset(process.argv[i + 1]) : await fromActor(requireToken());
   const next = shape(items);
-
-  let prevCount = 0;
-  try {
-    prevCount = JSON.parse(await readFile(OUT, "utf8")).reviews.length;
-  } catch {}
 
   if (!next.reviews.length) throw new Error("Scrape returned no reviews; keeping the published file.");
   if (prevCount && next.reviews.length < prevCount * MIN_KEEP_RATIO) {
@@ -101,6 +100,27 @@ async function main() {
     );
   }
   if (!next.place.rating) throw new Error("Scrape returned no overall rating; keeping the published file.");
+  return next;
+}
+
+async function main() {
+  let prevCount = 0;
+  try {
+    prevCount = JSON.parse(await readFile(OUT, "utf8")).reviews.length;
+  } catch {}
+
+  const attempts = process.argv.includes("--dataset") ? 1 : ATTEMPTS;
+  let next;
+  for (let n = 1; ; n++) {
+    try {
+      next = await scrape(prevCount);
+      break;
+    } catch (e) {
+      if (n >= attempts) throw e;
+      console.log(`Attempt ${n} failed: ${e.message.split("\n")[0]} Retrying in ${RETRY_WAIT_MS / 1000}s.`);
+      await new Promise((r) => setTimeout(r, RETRY_WAIT_MS));
+    }
+  }
 
   await writeFile(OUT, JSON.stringify(next, null, 2) + "\n");
   console.log(

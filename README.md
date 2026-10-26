@@ -17,7 +17,7 @@ APIFY_TOKEN=... node scripts/refresh.mjs
 
 ## Safety
 
-If a scrape returns nothing, the wrong place, no rating, or more than 20% fewer reviews than are already published, the job fails and the published file stays as it was. GitHub emails the repo owner when a scheduled run fails.
+If a scrape returns nothing, the wrong place, no rating, or more than 20% fewer reviews than are already published, or the Apify run times out, the script waits a minute and tries once more. If the second try fails too, the job fails and the published file stays as it was. GitHub emails the repo owner when a scheduled run fails.
 
 ## Setup
 
