@@ -27,7 +27,7 @@ The workflow needs one repository secret, `APIFY_TOKEN` (Apify console → Setti
 
 Moved here from Claude's memory on 2026-10-20.
 
-- Built 2026-10-01 because the MarketPushApps "Google Reviews" app's free plan caps at 10 reviews and Nathan won't pay for apps. Public repo on Nathan's personal account; repo-local git identity is narod22 because the global default authors as ranch-26.
+- Built 2026-10-01 because the MarketPushApps "Google Reviews" app's free plan caps at 10 reviews and Nathan won't pay for apps. Public repo on Nathan's personal account; repo-local git identity is narod22 because the global default authors as ranch-26. The remote URL carries `narod22@` so the credential manager hands over the personal token on push.
 - On the site: Wix Custom Embed id `8db32c0c-989b-4b1d-90b5-ca39c00a7f3b` ("Pastry Leidy reviews badge", BODY_END), switched on 2026-10-01 after Johanna's OK. The embed src carries `badge.js?v=N`; bump N (PATCH with the current revision) after any `badge.js` change, because GitHub Pages lets browsers cache it for 10 minutes.
 - Data: Apify `compass/Google-Maps-Reviews-Scraper`, place ID `ChIJiy8JYSqtGYgRsFX0NiXSfDI`, on Nathan's personal Apify account. Token "Pastry Leidy reviews" is the repo secret `APIFY_TOKEN`.
 - The `gh` token available to Claude lacks `workflow` scope, so changes to the workflow file go through the GitHub web UI (a prefilled `/new/main?filename=...&value=...` link).
