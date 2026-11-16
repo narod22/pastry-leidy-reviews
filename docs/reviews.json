@@ -1,14 +1,24 @@
 {
-  "updated": "2026-11-09T21:18:56.609Z",
+  "updated": "2026-11-16T20:50:18.989Z",
   "place": {
     "name": "Pastry Leidy",
     "placeId": "ChIJiy8JYSqtGYgRsFX0NiXSfDI",
     "rating": 5,
-    "reviewsCount": 87,
+    "reviewsCount": 88,
     "url": "https://www.google.com/maps/place/?q=place_id:ChIJiy8JYSqtGYgRsFX0NiXSfDI",
     "writeReviewUrl": "https://search.google.com/local/writereview?placeid=ChIJiy8JYSqtGYgRsFX0NiXSfDI"
   },
   "reviews": [
+    {
+      "id": "Ci9DQUlRQUNvZENodHljRjlvT2xGMWNuTkphMlpSZW1rNGRreFhXVzVGU21kek1tYxAB",
+      "name": "Kay Holt",
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocLOHhqUCm43kU6MPE4kVak0lyj4DVTVElwkby0BhY6n1AmvOw=s72-c-rp-mo-ba12-br100",
+      "stars": 5,
+      "date": "2026-11-10T14:40:54.662Z",
+      "text": "Leidy did an amazing job! I gave her an idea of my vision and she was spot on! The cake was delicious! Thank you Leidy for making our special event perfect!",
+      "reply": "Hi Kayla, thank you so much for the wonderful 5-star review! Bringing your vision to life was an absolute pleasure, and I'm thrilled to hear the cake was spot on and delicious. Knowing it helped make your special event perfect means the world to me. Thank you for trusting Pastry Leidy, and I look forward to baking for your future celebrations!",
+      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2xGMWNuTkphMlpSZW1rNGRreFhXVzVGU21kek1tYxAB!2m1!1s0x0:0x327cd22536f455b0!3m1!1s2@1:CAIQACodChtycF9oOlF1cnNJa2ZRemk4dkxXWW5FSmdzMmc%7C%7C?hl=en-US"
+    },
     {
       "id": "Ci9DQUlRQUNvZENodHljRjlvT25odlEzZHdSR2t3YVZWNU9EVkdiWGN3ZVV4RVprRRAB",
       "name": "Stephanie Laing",
